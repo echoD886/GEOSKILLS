@@ -1,6 +1,8 @@
 ---
 name: blog-auto
-description: Universal top-tier blog skill for any project — Next.js / Astro / Hugo / Jekyll / Gatsby / generic MDX. Three modes — (1) WRITE new blogs with full quality / EEAT / AI-citation optimization, (2) REWRITE existing blogs to lift quality + citations, (3) AUDIT existing blogs against the 8-layer top-SaaS bar (Schema / EEAT / AI citation / multilingual coverage / internal link graph / SERP gap / image evidence / anti-AI detection) and produce a per-article scorecard with concrete file:line fixes. Quality bar = Stripe / Vercel / Anthropic / Cloudflare engineering-blog tier — articles strong enough to rank in Google AI Overview, get cited by Perplexity / ChatGPT / Bing Copilot, be picked up by Hacker News / Reddit / Substack roundups, and pass curator review on Medium / Substack. MANDATORY uses DataForSEO API (Keyword Suggestions + Bulk KD + Search Intent + SERP Organic Advanced + PAA) — no DataForSEO credentials, no run. Auto-detects the project from the filesystem; never hardcodes. Invocation examples — "blog" / "5 blogs" / "5 blogs in en zh ja" / "rewrite my existing blog X for AI citation" / "audit my blogs" / "审查现有 blog". Defaults to dry-run preview; commits only when explicitly asked. Install once at `~/.codex/skills/blog-auto/` (or `~/.claude/skills/blog-auto/`); works in every project you cd into.
+version: 1.1.0
+calibrated_from: 37 verbatim audits across 7 categories (US SaaS engineering + AI labs + founder essays + tech-strategy / newsletter giants / big-tech engineering / solo-dev educational / Chinese deep-report+weekly+zhihu) — see references/archetypes*.md
+description: Universal top-tier blog skill for any project — Next.js / Astro / Hugo / Jekyll / Gatsby / generic MDX. Three modes — (1) WRITE new blogs with full quality / EEAT / AI-citation optimization, (2) REWRITE existing blogs to lift quality + citations, (3) AUDIT existing blogs against the 8-layer top-SaaS bar (Schema / EEAT / AI citation / multilingual coverage / internal link graph / SERP gap / image evidence / anti-AI detection) and produce a per-article scorecard with concrete file:line fixes. Quality bar = Stripe / Vercel / Anthropic / Cloudflare engineering-blog tier — articles strong enough to rank in Google AI Overview, get cited by Perplexity / ChatGPT / Bing Copilot, be picked up by Hacker News / Reddit / Substack roundups, and pass curator review on Medium / Substack. Calibrated from 37 verbatim audits across 7 categories: SaaS engineering (Stripe/Vercel/Cloudflare/Linear/Supabase), AI labs (Anthropic/OpenAI/Hugging Face), founder essays (DHH/PG/Naval/patio11), tech strategy (Stratechery/Evans/a16z/Sequoia), newsletter giants (Lenny/Packy/Tunguz/Every/Pirate Wires), big-tech engineering (Netflix/Uber/Airbnb/Discord), solo-dev educational (Julia Evans/Dan Abramov), Chinese顶级 blogs (36氪/虎嗅/极客公园/阮一峰/少数派/思否/知乎). MANDATORY uses DataForSEO API. Auto-detects the project from the filesystem; never hardcodes. Invocation examples — "blog" / "5 blogs in en zh ja" / "rewrite my X for AI citation" / "audit my blogs" / "审查现有 blog". Defaults to dry-run preview; commits only when explicitly asked. Install once at `~/.codex/skills/blog-auto/`; works in every project you cd into.
 ---
 
 # Blog Auto
@@ -708,6 +710,23 @@ Closing move: a question or invitation for disagreement — never a hedge. Plaus
 
 ---
 
+### Archetypes F–M — Extended (read the reference files when invoking)
+
+The 5 archetypes above (A-E) are calibrated on US SaaS engineering + founder essays. For other categories of post, pick from these 8 extended archetypes and read the matching `references/archetypes-<category>.md` file before drafting:
+
+| Archetype | Use when | Reference file |
+|---|---|---|
+| **F. Strategy / Industry Analysis** | Market analysis, framework-drop essay, VC perspective post. Reference: Stratechery, Benedict Evans, a16z, Sequoia | `references/archetypes-strategy.md` |
+| **G. Newsletter Essay / Substack** | Recurring newsletter, Substack-style essay, opinion column, curated weekly. Reference: Lenny, Packy McCormick, Tomasz Tunguz, Every, Pirate Wires | `references/archetypes-newsletter.md` |
+| **H. Big-Tech Engineering** | Hyperscale internal architecture post (PB/day, M req/sec). Reference: Netflix Tech, Uber Engineering, Airbnb Engineering, Discord | `references/archetypes-bigtech.md` |
+| **I. AI Lab Research (non-Anthropic)** | Frontier-lab disclosure or community technical post. Reference: OpenAI alignment / Hugging Face community | `references/archetypes-bigtech.md` |
+| **J. Solo Dev Educational** | Personal blog teaching post by a single developer. Reference: Julia Evans, Dan Abramov | `references/archetypes-bigtech.md` |
+| **K. Chinese Deep Report (中文)** | Chinese-locale deep business / industry / product essay. Reference: 36氪, 虎嗅, 极客公园, 少数派, 思否 | `references/archetypes-zh.md` |
+| **L. Chinese Weekly Curation (中文)** | Recurring Chinese weekly newsletter / 周刊 with templated section structure | `references/archetypes-zh.md` |
+| **M. Chinese Zhihu Longform (中文)** | 知乎 platform 长文 with 利益相关 disclosure, author certification, comment-weight CTA | `references/archetypes-zh.md` |
+
+**Routing rule**: when writing for a Chinese locale, always pick from K / L / M, not A-J. Cross-applying English archetypes to Chinese locales produces translation-tell content that fails Chinese SERP + LLM citation.
+
 ### Archetype selection rules
 
 - Choose ONE archetype per article. Never mix.
@@ -735,6 +754,31 @@ The most common failure mode of multi-reference skills is **stitching incompatib
 | Sub-500-word + ≥5 em-dashes + zero outbound auth links | Archetype E (DHH-essay variant) | Don't compress a case study to this length |
 | Plain-English availability + pricing in final sentence | Archetype B (Launch) | Never in research or essay |
 | Sandbox / live demo URL within first 30% scroll | Archetype B only | Don't fake one for case study |
+| Named capitalized framework as recurring proper noun | Archetype F (Strategy) only | Don't invent "Theory of X" in Launch / Case Study |
+| Self-citation density ≥ 7 per post | Archetype F (Strategy) or G (Newsletter) | Case Study has 0 self-cites; Incident has 0 |
+| Asterisk-break sectionless prose (`* * *`) | Archetype F (Evans-mode) or J (Abramov-mode) | Never in Case Study / Launch / Incident / Research |
+| "Happy Thursday!" / "Hi friends 👋" greeting opener | Archetype G (Newsletter cozy) | Unprofessional in any other archetype |
+| Multi-topic "Plus:..." tease in sentence 2 | Archetype G (Newsletter) only | Never in single-topic Case Study or Launch |
+| Day-of-week temporal anchor in opening | Archetype G (Newsletter) only | Research / Case Study is timeless |
+| Mid-essay sponsored block ("brought to you by") | Archetype G (Newsletter) only | Never in research / launch |
+| Multi-co-author byline (3-5 engineers) | Archetype H (Big-Tech Eng) | SaaS Case Study uses 1-2 authors |
+| Apache/OSS trademark glyph (™/®) in body | Archetype H (Big-Tech Eng) | Never in SaaS engineering or solo dev |
+| Numbered Pillar/Goal framework as H2s | Archetype H (Big-Tech Eng) | SaaS prefers narrative headers |
+| Production-scale numbers (PB/day, M/sec, billions) | Archetype H (Big-Tech Eng) | SaaS substitutes customer metrics |
+| Self-disclosure-of-bug opening | Archetype I.1 (OpenAI alignment) | Off-brand at Anthropic; impossible at HF community |
+| Upvote counter visible on post | Archetype I.2 (HF community) only | Never on OpenAI/Anthropic official research |
+| CLI/bash code block as central artifact | Archetype I.2 (HF community) | Never centerpiece of Anthropic or OpenAI research |
+| Hand-drawn zines / typographic ASCII art | Archetype J (Solo Dev) | Jarring in big-tech eng or SaaS |
+| Lowercase headers + vulnerability ("i'm not good at X") | Archetype J (Solo Dev) | Unprofessional in big-tech H |
+| Reader-supported tip-jar / Ko-fi CTA | Archetype J (Solo Dev) | Big-tech replaces with hiring CTA or omits |
+| 震惊体 / 反问体 title with 引号 反讽 | Chinese K / L / M only | Direct English translation reads as clickbait |
+| 公众号 QR card + "扫码关注" | Chinese K / L / M only | English version uses newsletter signup |
+| 一/二/三/四 Chinese-numeral H2 序号 | Chinese K / M | English uses Arabic numerals |
+| 「书名号」 wrapping concept names | Chinese K / M | English uses *italics* or "quoted" |
+| 利益相关 disclosure opener | Chinese M (Zhihu) only | Never in K / L; not used in English |
+| "前 XXX 公司 / 主理人 / 已发表 N 篇" author 三件套 | Chinese K / M | English byline stays minimal |
+| 四字短句 / 比喻 closing | Chinese K / M | English closes with imperative |
+| 12-section templated weekly structure | Chinese L (Weekly Curation) only | Don't invent templated sections per-post |
 
 If any move on the right column shows up outside its archetype, the article is Frankenstein. Rewrite.
 
