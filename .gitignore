@@ -1,0 +1,27 @@
+# Runtime cache from DataForSEO calls (each user's project, never committed)
+.blog-auto-cache/
+.blog-auto/
+.blog-auto-state.json
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*~
+
+# Node tooling (if scripts/ ever needs deps)
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+.env
+.env.local
+.env.*.local
+
+# Secrets — never commit
+*.pem
+*.key
+*-credentials.json
+secrets.json
