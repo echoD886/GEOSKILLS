@@ -4,6 +4,8 @@
 
 [![Skill](https://img.shields.io/badge/Codex-skill-blue)](https://github.com/echoD886/GEOSKILLS) [![Skill](https://img.shields.io/badge/Claude_Code-skill-purple)](https://github.com/echoD886/GEOSKILLS) [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
+📖 [中文 README](README.zh.md) · 🇺🇸 English (this page)
+
 ## What it does (three modes in one skill)
 
 ### Mode A — Write new blogs
