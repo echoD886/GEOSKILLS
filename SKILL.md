@@ -715,6 +715,74 @@ Closing move: a question or invitation for disagreement — never a hedge. Plaus
 - If none of the five archetypes fit the topic naturally, the topic is too thin or the writer doesn't have the raw material — kill the topic, don't lower the bar.
 - Cross-post / syndication rules differ per archetype. Archetypes A / C / D travel well to Hacker News. Archetypes B / E perform better on Reddit + LinkedIn. Archetype E performs best on Substack and personal newsletters.
 
+### Coherence Gate — anti-Frankenstein (apply before publish)
+
+The most common failure mode of multi-reference skills is **stitching incompatible moves from different archetypes into one article**. Result: jarring fragments that no real top-SaaS author would produce. This gate prevents that.
+
+#### Anchor Exclusivity Table — these moves DO NOT cross archetypes
+
+| Signature move | Belongs ONLY to | Never use outside |
+|---|---|---|
+| UTC timestamp chronology (`14:08 UTC → 14:12 UTC`) | Archetype C (Incident) | Never in case study / launch / essay |
+| `"Informed Speculation"` H2 (preemptive uncertainty disclosure) | Archetype C (Cloudflare) | Never elsewhere |
+| Named remediation program (`"Code Orange"` style) | Archetype C only | Don't invent "Code Orange" for a launch |
+| BibTeX citation block at end | Archetype D (Research) | Never in case study / launch / essay |
+| Verbatim model chain-of-thought excerpt | Archetype D only | Never in marketing or case study |
+| Per-month conversion table (Jan-Apr-style) | Archetype E (Transparency) | Don't use in incident or launch |
+| Q&A interview format (Naval / Resend) | Archetype E only | Never in research or incident |
+| `"How we built"` declarative section H2 | Archetype A (Case Study) | Don't use in launch announcement |
+| Recurring "$20 example" artifact across sections | Archetype A only | Don't replicate in essay / launch |
+| Sub-500-word + ≥5 em-dashes + zero outbound auth links | Archetype E (DHH-essay variant) | Don't compress a case study to this length |
+| Plain-English availability + pricing in final sentence | Archetype B (Launch) | Never in research or essay |
+| Sandbox / live demo URL within first 30% scroll | Archetype B only | Don't fake one for case study |
+
+If any move on the right column shows up outside its archetype, the article is Frankenstein. Rewrite.
+
+#### Banned cross-archetype combinations
+
+These pairs **never** appear in a single article:
+
+- **A (Case Study) + B (Launch)** — pick one. Are we explaining how it works, or announcing it ships? Not both in one post.
+- **C (Incident) + B (Launch)** — announcing a feature inside a post-mortem destroys the apology tone.
+- **D (Research) + E (Transparency)** — research speaks in third-person passive ("we find that..."); transparency speaks in first-person opinionated ("we don't run A/B tests"). Voice clash.
+- **C (Incident) + A (Case Study)** — a "how we built" tone inside an outage post-mortem reads as deflection.
+- **E (DHH-essay variant <500 words) + ANY archetype with charts / tables / code blocks** — the format breaks.
+
+If the source material truly spans two archetypes (e.g., "we built X to fix the outage") — write **two separate posts**, link them. Never compress two into one.
+
+#### Voice consistency check
+
+Each archetype has a default voice. Don't switch voices mid-article:
+
+| Archetype | Default voice | Person | Tense |
+|---|---|---|---|
+| A. Case Study | Engineering team, factual, declarative | "We" (team) | Past tense for the work, present for results |
+| B. Launch | Product team, capability-first | "We" (company) | Present + future ("now available", "we expect") |
+| C. Incident | Blunt operator + accountable executive | "We" (with apology) | Past tense, dated |
+| D. Research | Authorial team, neutral academic | "We find that..." (collective) | Present academic |
+| E. Transparency / Essay | Single author, opinionated | "I" (founder/operator) | Mixed; first-person dominant |
+
+An article that opens "I noticed" and then switches mid-way to "We tested 16 models" reads as two writers stitched together. Pick one voice, hold it.
+
+#### Frankenstein self-check (final pass before publish)
+
+After the draft is complete, ask one question:
+
+> "Could a knowledgeable reader plausibly believe this was written by Stripe Engineering / by Cloudflare / by Plausible / by DHH / by Anthropic Research — i.e., by ONE specific team in ONE house style?"
+
+- If the answer is yes → ship.
+- If the answer is "looks like 2-3 different teams stitched together" → identify the borrowed moves from foreign archetypes, **remove them**, re-anchor in the chosen archetype's own signature moves.
+
+Concrete diagnostic prompts:
+
+- Does the opening match the archetype's expected opening (Case Study: metric / Incident: timestamp+impact / Launch: capability statement / Research: finding / Essay: contrarian claim)? If not, rewrite the opening.
+- Do the H2s share a single style (all declarative claims OR all Q-form OR all narrative)? If mixed, normalize.
+- Is the closing aligned with the archetype (Case Study: next-step roadmap / Incident: apology + remediation commit / Launch: docs+sandbox / Research: BibTeX / Essay: aphorism)? If not, rewrite the closing.
+- Is the recurring artifact (Stripe's `$20 example`, Linear's `@Linear prompt`, etc.) used **only if the chosen archetype requires it**? If borrowed without reason, remove.
+- Is the voice (I / we-team / we-company / academic-we) consistent throughout? If switching, normalize to one.
+
+Run this gate before declaring the draft done. Skipping it causes the most common AI-blog failure: **right-looking fragments that don't cohere as a whole article**.
+
 ### Original Research Discipline (applies to all archetypes)
 
 Any quantitative claim must be structured as Hypothesis → Method → Result → Caveat, in that order, in the prose:
